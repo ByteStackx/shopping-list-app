@@ -1,0 +1,50 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "exampleUser",
+      "email": "user@example.com",
+      "password": "hashed_password",
+      "createdAt": "2024-06-10T12:00:00Z"
+    },
+    {
+      "id": "7ce9",
+      "username": "ash",
+      "name": "ash",
+      "surname": "man",
+      "cell": "2222222",
+      "email": "ash@man.com",
+      "password": "U2FsdGVkX1+qZa/UZif7/8ezksK/3KoEIC905BD1Hqc="
+    }
+  ],
+  "shoppingListItems": [
+    {
+      "id": "1",
+      "userId": 1,
+      "name": "Milk",
+      "quantity": 2,
+      "notes": "Low fat",
+      "category": "Dairy",
+      "images": [
+        "https://example.com/images/milk1.jpg",
+        "https://example.com/images/milk2.jpg"
+      ]
+    },
+    {
+      "id": "5c95",
+      "name": "Dish soap",
+      "quantity": 1,
+      "notes": "Sunlight",
+      "category": "Groceries",
+      "image": ""
+    },
+    {
+      "id": "62a6",
+      "name": "potatoes",
+      "quantity": 1,
+      "notes": "",
+      "category": "Groceries",
+      "image": ""
+    }
+  ]
+}
