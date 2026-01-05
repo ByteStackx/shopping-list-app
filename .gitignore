@@ -16,9 +16,6 @@ dist-ssr
 .env
 .env.production
 
-# Database
-src/db/db.json
-
 # Build
 build
 .cache

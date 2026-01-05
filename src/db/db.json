@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "exampleUser",
+      "email": "user@example.com",
+      "password": "hashed_password",
+      "createdAt": "2024-06-10T12:00:00Z"
+    }
+  ],
+  "shoppingListItems": [
+    {
+      "id": "1",
+      "userId": 1,
+      "name": "Milk",
+      "quantity": 2,
+      "notes": "Low fat",
+      "category": "Dairy",
+      "images": [
+        "https://example.com/images/milk1.jpg",
+        "https://example.com/images/milk2.jpg"
+      ]
+    }
+  ]
+}
