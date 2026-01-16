@@ -1,4 +1,4 @@
-import './ErrorMessage.css';
+import styles from './ErrorMessage.module.css';
 
 interface ErrorMessageProps {
   message: string;
@@ -6,8 +6,8 @@ interface ErrorMessageProps {
 
 function ErrorMessage({ message }: ErrorMessageProps) {
   return (
-    <div className="error-message" role="alert">
-      <span className="error-text">{message}</span>
+    <div className={styles['error-message']} role="alert">
+      <span className={styles['error-text']}>{message}</span>
     </div>
   );
 }
