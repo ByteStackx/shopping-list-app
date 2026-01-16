@@ -6,6 +6,7 @@ import { fetchLists, addList, updateList, deleteList } from '../shoppingListSlic
 import type { ShoppingListItem as ShoppingListItemType } from '../types';
 import ShoppingListForm from '../components/ShoppingListForm';
 import ShoppingListItem from '../components/ShoppingListItem.tsx';
+import CategoryFilter from '../components/CategoryFilter.tsx';
 
 const categories = ['Groceries', 'Electronics', 'Clothing', 'Other'];
 
@@ -23,7 +24,7 @@ const ShoppingListPage: React.FC = () => {
   });
   const [search, setSearch] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
-  // Removed unused navigate
+  const [categoryFilter, setCategoryFilter] = useState('All');
   const sort = searchParams.get('sort') || 'name';
 
   const handleFormChange = (patch: Partial<ShoppingListItemType>) => {
@@ -64,6 +65,7 @@ const ShoppingListPage: React.FC = () => {
   // Search and sort
   const filtered = items
     .filter(i => i.name.toLowerCase().includes(search.toLowerCase()))
+    .filter(i => (categoryFilter === 'All' ? true : i.category === categoryFilter))
     .sort((a, b) => {
       if (sort === 'name') return a.name.localeCompare(b.name);
       if (sort === 'category') return a.category.localeCompare(b.category);
@@ -85,6 +87,11 @@ const ShoppingListPage: React.FC = () => {
       />
       <div style={{ margin: '1em 0' }}>
         <input type="text" placeholder="Search by name" value={search} onChange={e => setSearch(e.target.value)} />
+        <CategoryFilter
+          categories={categories}
+          value={categoryFilter}
+          onChange={setCategoryFilter}
+        />
         <select
           value={sort}
           onChange={e => {
