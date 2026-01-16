@@ -2,21 +2,9 @@ import React, { useEffect, useState } from 'react';
 import '../styles/ShoppingListPage.css';
 import { useSearchParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../store';
-import {
-  fetchLists,
-  addList,
-  updateList,
-  deleteList,
-} from '../shoppingListSlice';
-
-interface ShoppingListItem {
-  id?: number;
-  name: string;
-  quantity: number;
-  notes?: string;
-  category: string;
-  image?: string;
-}
+import { fetchLists, addList, updateList, deleteList } from '../shoppingListSlice';
+import { ShoppingListItem } from '../types';
+import ShoppingListForm from '../components/ShoppingListForm';
 
 const categories = ['Groceries', 'Electronics', 'Clothing', 'Other'];
 
@@ -36,6 +24,10 @@ const ShoppingListPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   // Removed unused navigate
   const sort = searchParams.get('sort') || 'name';
+
+  const handleFormChange = (patch: Partial<ShoppingListItem>) => {
+    setForm(prev => ({ ...prev, ...patch }));
+  };
 
   // Fetch items from JSON server
   useEffect(() => {
@@ -83,16 +75,13 @@ const ShoppingListPage: React.FC = () => {
       <h2>Shopping Lists</h2>
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={form.id ? handleUpdate : handleAdd}>
-        <input type="text" placeholder="Item Name" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} required />
-        <input type="number" placeholder="Quantity" value={form.quantity} onChange={e => setForm({ ...form, quantity: Number(e.target.value) })} required min={1} />
-        <input type="text" placeholder="Notes" value={form.notes} onChange={e => setForm({ ...form, notes: e.target.value })} />
-        <select value={form.category} onChange={e => setForm({ ...form, category: e.target.value })}>
-          {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
-        </select>
-        <input type="text" placeholder="Image URL" value={form.image} onChange={e => setForm({ ...form, image: e.target.value })} />
-  <button type="submit">{form.id ? 'Update Item' : 'Add Item'}</button>
-      </form>
+      <ShoppingListForm
+        form={form}
+        categories={categories}
+        isEditing={Boolean(form.id)}
+        onSubmit={form.id ? handleUpdate : handleAdd}
+        onChange={handleFormChange}
+      />
       <div style={{ margin: '1em 0' }}>
         <input type="text" placeholder="Search by name" value={search} onChange={e => setSearch(e.target.value)} />
         <select
