@@ -6,6 +6,15 @@
       "email": "user@example.com",
       "password": "hashed_password",
       "createdAt": "2024-06-10T12:00:00Z"
+    },
+    {
+      "id": "d491",
+      "username": "newuser",
+      "name": "new",
+      "surname": "user",
+      "cell": "+2725536952",
+      "email": "new@user.com",
+      "password": "U2FsdGVkX198laY3JJ8GSfiaiUIUrpMVP1U5YiHVGI0="
     }
   ],
   "shoppingListItems": [
