@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../styles/RegistrationPage.css';
 import CryptoJS from 'crypto-js';
 import ErrorMessage from '../components/ErrorMessage.tsx';
+import SuccessMessage from '../components/SuccessMessage.tsx';
 
 const RegistrationPage: React.FC = () => {
   const [form, setForm] = useState({
@@ -62,11 +63,13 @@ const RegistrationPage: React.FC = () => {
       <p>
         Already have an account? <a href="/login">Login</a>
       </p>
-      {message && (message.toLowerCase().includes('error') || message.toLowerCase().includes('failed')) ? (
+      {message && ((message.toLowerCase().includes('error') || message.toLowerCase().includes('failed')) ? (
         <ErrorMessage message={message} />
+      ) : message.toLowerCase().includes('success') ? (
+        <SuccessMessage message={message} />
       ) : (
-        message && <p>{message}</p>
-      )}
+        <p>{message}</p>
+      ))}
     </div>
   );
 };
