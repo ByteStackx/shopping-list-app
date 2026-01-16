@@ -16,12 +16,13 @@ function App() {
     <>
       {/* Simple navigation for demonstration */}
       {isAuthenticated && (
-        <nav style={{ display: 'flex', gap: '1em', marginBottom: '1em' }}>
+        <nav style={{ display: 'flex', gap: '1em', position: 'fixed', top: 0, left: 0, right: 0, padding: '1em', backgroundColor: 'white', boxShadow: '0 2px 4px rgba(0,0,0,0.1)', zIndex: 1000, justifyContent: 'center', alignItems: 'center' }}>
           <Link to="/">Home</Link>
           <Link to="/shopping-lists">Shopping Lists</Link>
           <Link to="/profile">Profile</Link>
         </nav>
       )}
+      <main style={{ marginTop: '60px' }}>
       <Routes>
         <Route path="/login" element={isAuthenticated ? <Navigate to="/" /> : <LoginPage />} />
         <Route path="/register" element={isAuthenticated ? <Navigate to="/" /> : <RegistrationPage />} />
@@ -29,6 +30,7 @@ function App() {
         <Route path="/profile" element={isAuthenticated ? <ProfilePage /> : <Navigate to="/login" />} />
         <Route path="/shopping-lists" element={isAuthenticated ? <ShoppingListPage /> : <Navigate to="/login" />} />
       </Routes>
+      </main>
     </>
   );
 }
