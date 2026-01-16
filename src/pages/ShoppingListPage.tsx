@@ -3,8 +3,9 @@ import '../styles/ShoppingListPage.css';
 import { useSearchParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../store';
 import { fetchLists, addList, updateList, deleteList } from '../shoppingListSlice';
-import { ShoppingListItem } from '../types';
+import type { ShoppingListItem as ShoppingListItemType } from '../types';
 import ShoppingListForm from '../components/ShoppingListForm';
+import ShoppingListItem from '../components/ShoppingListItem.tsx';
 
 const categories = ['Groceries', 'Electronics', 'Clothing', 'Other'];
 
@@ -13,7 +14,7 @@ const ShoppingListPage: React.FC = () => {
   const loading = useAppSelector(state => state.shoppingList.loading);
   const error = useAppSelector(state => state.shoppingList.error);
   const dispatch = useAppDispatch();
-  const [form, setForm] = useState<ShoppingListItem>({
+  const [form, setForm] = useState<ShoppingListItemType>({
     name: '',
     quantity: 1,
     notes: '',
@@ -25,7 +26,7 @@ const ShoppingListPage: React.FC = () => {
   // Removed unused navigate
   const sort = searchParams.get('sort') || 'name';
 
-  const handleFormChange = (patch: Partial<ShoppingListItem>) => {
+  const handleFormChange = (patch: Partial<ShoppingListItemType>) => {
     setForm(prev => ({ ...prev, ...patch }));
   };
 
@@ -97,13 +98,12 @@ const ShoppingListPage: React.FC = () => {
       </div>
       <ul>
         {filtered.map(item => (
-          <li key={item.id}>
-            <strong>{item.name}</strong> (x{item.quantity}) [{item.category}]
-            {item.notes && <span> - {item.notes}</span>}
-            {item.image && <img src={item.image} alt={item.name} style={{ width: 40, height: 40, objectFit: 'cover', marginLeft: 8 }} />}
-            <button onClick={() => handleEdit(item.id!)}>Edit</button>
-            <button onClick={() => handleDelete(item.id!)}>Delete</button>
-          </li>
+          <ShoppingListItem
+            key={item.id}
+            item={item}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+          />
         ))}
       </ul>
     </div>
