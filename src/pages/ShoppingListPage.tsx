@@ -7,6 +7,7 @@ import type { ShoppingListItem as ShoppingListItemType } from '../types';
 import ShoppingListForm from '../components/ShoppingListForm';
 import ShoppingListItem from '../components/ShoppingListItem.tsx';
 import CategoryFilter from '../components/CategoryFilter.tsx';
+import LoadingSpinner from '../components/LoadingSpinner.tsx';
 
 const categories = ['Groceries', 'Electronics', 'Clothing', 'Other'];
 
@@ -76,7 +77,7 @@ const ShoppingListPage: React.FC = () => {
   return (
   <div className="shopping-list-page">
       <h2>Shopping Lists</h2>
-      {loading && <p>Loading...</p>}
+      {loading && <LoadingSpinner />}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <ShoppingListForm
         form={form}
