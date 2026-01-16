@@ -3,6 +3,7 @@ import '../styles/ProfilePage.css';
 import { useAppSelector, useAppDispatch } from '../store';
 import { login } from '../authSlice';
 import CryptoJS from 'crypto-js';
+import ErrorMessage from '../components/ErrorMessage.tsx';
 
 const ProfilePage: React.FC = () => {
   const user = useAppSelector(state => state.auth.user);
@@ -80,7 +81,11 @@ const ProfilePage: React.FC = () => {
         <input type="password" name="password" placeholder="New Password (leave blank to keep current)" value={form.password} onChange={handleChange} />
         <button type="submit">Update Profile</button>
       </form>
-      {message && <p>{message}</p>}
+      {message && (message.toLowerCase().includes('error') || message.toLowerCase().includes('failed') || message.toLowerCase().includes('not found')) ? (
+        <ErrorMessage message={message} />
+      ) : (
+        message && <p>{message}</p>
+      )}
     </div>
   );
 };

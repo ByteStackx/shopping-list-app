@@ -3,6 +3,7 @@ import '../styles/LoginPage.css';
 import CryptoJS from 'crypto-js';
 import { useAppDispatch } from '../store';
 import { login } from '../authSlice';
+import ErrorMessage from '../components/ErrorMessage.tsx';
 
 const LoginPage: React.FC = () => {
   const [form, setForm] = useState({ email: '', password: '' });
@@ -54,7 +55,11 @@ const LoginPage: React.FC = () => {
       <p>
         Don't have an account? <a href="/register">Register</a>
       </p>
-      {message && <p>{message}</p>}
+      {message && message.toLowerCase().includes('error') || message.toLowerCase().includes('not found') || message.toLowerCase().includes('incorrect') ? (
+        <ErrorMessage message={message} />
+      ) : (
+        message && <p>{message}</p>
+      )}
     </div>
   );
 };

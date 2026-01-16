@@ -8,6 +8,7 @@ import ShoppingListForm from '../components/ShoppingListForm';
 import ShoppingListItem from '../components/ShoppingListItem.tsx';
 import CategoryFilter from '../components/CategoryFilter.tsx';
 import LoadingSpinner from '../components/LoadingSpinner.tsx';
+import ErrorMessage from '../components/ErrorMessage.tsx';
 
 const categories = ['Groceries', 'Electronics', 'Clothing', 'Other'];
 
@@ -78,7 +79,7 @@ const ShoppingListPage: React.FC = () => {
   <div className="shopping-list-page">
       <h2>Shopping Lists</h2>
       {loading && <LoadingSpinner />}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <ErrorMessage message={error} />}
       <ShoppingListForm
         form={form}
         categories={categories}
