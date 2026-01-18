@@ -1,5 +1,7 @@
 import React from 'react';
 import { ShoppingListItem } from '../types';
+import InputField from './InputField.tsx';
+
 interface ShoppingListFormProps {
   form: ShoppingListItem;
   categories: string[];
@@ -11,14 +13,14 @@ interface ShoppingListFormProps {
 function ShoppingListForm({ form, categories, isEditing, onSubmit, onChange }: ShoppingListFormProps) {
   return (
     <form onSubmit={onSubmit} className="shopping-list-form">
-      <input
+      <InputField
         type="text"
         placeholder="Item Name"
         value={form.name}
         onChange={e => onChange({ name: e.target.value })}
         required
       />
-      <input
+      <InputField
         type="number"
         placeholder="Quantity"
         value={form.quantity}
@@ -26,10 +28,10 @@ function ShoppingListForm({ form, categories, isEditing, onSubmit, onChange }: S
         required
         min={1}
       />
-      <input
+      <InputField
         type="text"
         placeholder="Notes"
-        value={form.notes}
+        value={form.notes || ''}
         onChange={e => onChange({ notes: e.target.value })}
       />
       <select
@@ -42,10 +44,10 @@ function ShoppingListForm({ form, categories, isEditing, onSubmit, onChange }: S
           </option>
         ))}
       </select>
-      <input
+      <InputField
         type="text"
         placeholder="Image URL"
-        value={form.image}
+        value={form.image || ''}
         onChange={e => onChange({ image: e.target.value })}
       />
       <button type="submit">{isEditing ? 'Update Item' : 'Add Item'}</button>

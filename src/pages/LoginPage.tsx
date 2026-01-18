@@ -5,6 +5,7 @@ import { useAppDispatch } from '../store';
 import { login } from '../authSlice';
 import ErrorMessage from '../components/ErrorMessage.tsx';
 import SuccessMessage from '../components/SuccessMessage.tsx';
+import InputField from '../components/InputField.tsx';
 
 const LoginPage: React.FC = () => {
   const [form, setForm] = useState({ email: '', password: '' });
@@ -49,8 +50,8 @@ const LoginPage: React.FC = () => {
   <div className="login-page">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <input type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
-        <input type="password" name="password" placeholder="Password" value={form.password} onChange={handleChange} required />
+        <InputField type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
+        <InputField type="password" name="password" placeholder="Password" value={form.password} onChange={handleChange} required />
         <button type="submit">Login</button>
       </form>
       <p>

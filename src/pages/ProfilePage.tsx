@@ -5,6 +5,7 @@ import { login } from '../authSlice';
 import CryptoJS from 'crypto-js';
 import ErrorMessage from '../components/ErrorMessage.tsx';
 import SuccessMessage from '../components/SuccessMessage.tsx';
+import InputField from '../components/InputField.tsx';
 
 const ProfilePage: React.FC = () => {
   const user = useAppSelector(state => state.auth.user);
@@ -75,11 +76,11 @@ const ProfilePage: React.FC = () => {
   <div className="profile-page">
       <h2>Profile</h2>
       <form onSubmit={handleUpdate}>
-        <input type="text" name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
-        <input type="text" name="surname" placeholder="Surname" value={form.surname} onChange={handleChange} required />
-        <input type="tel" name="cell" placeholder="Cell Number" value={form.cell} onChange={handleChange} required />
-        <input type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
-        <input type="password" name="password" placeholder="New Password (leave blank to keep current)" value={form.password} onChange={handleChange} />
+        <InputField type="text" name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
+        <InputField type="text" name="surname" placeholder="Surname" value={form.surname} onChange={handleChange} required />
+        <InputField type="tel" name="cell" placeholder="Cell Number" value={form.cell} onChange={handleChange} required />
+        <InputField type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
+        <InputField type="password" name="password" placeholder="New Password (leave blank to keep current)" value={form.password} onChange={handleChange} />
         <button type="submit">Update Profile</button>
       </form>
       {message && ((message.toLowerCase().includes('error') || message.toLowerCase().includes('failed') || message.toLowerCase().includes('not found')) ? (

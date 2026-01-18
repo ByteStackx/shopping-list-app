@@ -3,6 +3,7 @@ import '../styles/RegistrationPage.css';
 import CryptoJS from 'crypto-js';
 import ErrorMessage from '../components/ErrorMessage.tsx';
 import SuccessMessage from '../components/SuccessMessage.tsx';
+import InputField from '../components/InputField.tsx';
 
 const RegistrationPage: React.FC = () => {
   const [form, setForm] = useState({
@@ -52,12 +53,12 @@ const RegistrationPage: React.FC = () => {
   <div className="registration-page">
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="username" placeholder="Username" value={form.username} onChange={handleChange} required />
-        <input type="text" name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
-        <input type="text" name="surname" placeholder="Surname" value={form.surname} onChange={handleChange} required />
-        <input type="tel" name="cell" placeholder="Cell Number" value={form.cell} onChange={handleChange} required />
-        <input type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
-        <input type="password" name="password" placeholder="Password" value={form.password} onChange={handleChange} required />
+        <InputField type="text" name="username" placeholder="Username" value={form.username} onChange={handleChange} required />
+        <InputField type="text" name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
+        <InputField type="text" name="surname" placeholder="Surname" value={form.surname} onChange={handleChange} required />
+        <InputField type="tel" name="cell" placeholder="Cell Number" value={form.cell} onChange={handleChange} required />
+        <InputField type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
+        <InputField type="password" name="password" placeholder="Password" value={form.password} onChange={handleChange} required />
         <button type="submit">Register</button>
       </form>
       <p>
