@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/RegistrationPage.css';
+import styles from '../styles/RegistrationPage.module.css';
 import CryptoJS from 'crypto-js';
 import ErrorMessage from '../components/ErrorMessage.tsx';
 import SuccessMessage from '../components/SuccessMessage.tsx';
@@ -50,27 +50,42 @@ const RegistrationPage: React.FC = () => {
   };
 
   return (
-  <div className="registration-page">
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <InputField type="text" name="username" placeholder="Username" value={form.username} onChange={handleChange} required />
-        <InputField type="text" name="name" placeholder="Name" value={form.name} onChange={handleChange} required />
-        <InputField type="text" name="surname" placeholder="Surname" value={form.surname} onChange={handleChange} required />
-        <InputField type="tel" name="cell" placeholder="Cell Number" value={form.cell} onChange={handleChange} required />
-        <InputField type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
-        <InputField type="password" name="password" placeholder="Password" value={form.password} onChange={handleChange} required />
-        <button type="submit">Register</button>
-      </form>
-      <p>
-        Already have an account? <a href="/login">Login</a>
-      </p>
-      {message && ((message.toLowerCase().includes('error') || message.toLowerCase().includes('failed')) ? (
-        <ErrorMessage message={message} />
-      ) : message.toLowerCase().includes('success') ? (
-        <SuccessMessage message={message} />
-      ) : (
-        <p>{message}</p>
-      ))}
+    <div className={styles['registration-page']}>
+      <div className={styles['registration-card']}>
+        <div className={styles['registration-header']}>
+          <h2>Create Account</h2>
+          <p className={styles['registration-subtitle']}>Join us to manage your shopping lists</p>
+        </div>
+        <form onSubmit={handleSubmit}>
+          <div className={styles['form-row']}>
+            <InputField type="text" name="username" placeholder="Username" value={form.username} onChange={handleChange} required />
+          </div>
+          <div className={styles['form-row']}>
+            <InputField type="text" name="name" placeholder="First Name" value={form.name} onChange={handleChange} required />
+            <InputField type="text" name="surname" placeholder="Last Name" value={form.surname} onChange={handleChange} required />
+          </div>
+          <div className={styles['form-row']}>
+            <InputField type="tel" name="cell" placeholder="Phone Number" value={form.cell} onChange={handleChange} required />
+          </div>
+          <div className={styles['form-row']}>
+            <InputField type="email" name="email" placeholder="Email Address" value={form.email} onChange={handleChange} required />
+          </div>
+          <div className={styles['form-row']}>
+            <InputField type="password" name="password" placeholder="Password" value={form.password} onChange={handleChange} required />
+          </div>
+          <button type="submit" className={styles['register-button']}>Create Account</button>
+        </form>
+        <div className={styles['registration-footer']}>
+          <p>Already have an account? <a href="/login">Sign in</a></p>
+        </div>
+        {message && ((message.toLowerCase().includes('error') || message.toLowerCase().includes('failed')) ? (
+          <ErrorMessage message={message} />
+        ) : message.toLowerCase().includes('success') ? (
+          <SuccessMessage message={message} />
+        ) : (
+          <p>{message}</p>
+        ))}
+      </div>
     </div>
   );
 };
