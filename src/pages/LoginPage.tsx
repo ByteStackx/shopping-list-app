@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/LoginPage.css';
+import styles from '../styles/LoginPage.module.css';
 import CryptoJS from 'crypto-js';
 import { useAppDispatch } from '../store';
 import { login } from '../authSlice';
@@ -47,23 +47,32 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-  <div className="login-page">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <InputField type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
-        <InputField type="password" name="password" placeholder="Password" value={form.password} onChange={handleChange} required />
-        <button type="submit">Login</button>
-      </form>
-      <p>
-        Don't have an account? <a href="/register">Register</a>
-      </p>
-      {message && (message.toLowerCase().includes('error') || message.toLowerCase().includes('not found') || message.toLowerCase().includes('incorrect') ? (
-        <ErrorMessage message={message} />
-      ) : message.toLowerCase().includes('success') ? (
-        <SuccessMessage message={message} />
-      ) : (
-        <p>{message}</p>
-      ))}
+    <div className={styles['login-page']}>
+      <div className={styles['login-card']}>
+        <div className={styles['login-header']}>
+          <h2>Welcome Back</h2>
+          <p className={styles['login-subtitle']}>Sign in to your account</p>
+        </div>
+        <form onSubmit={handleSubmit}>
+          <div className={styles['form-row']}>
+            <InputField type="email" name="email" placeholder="Email Address" value={form.email} onChange={handleChange} required />
+          </div>
+          <div className={styles['form-row']}>
+            <InputField type="password" name="password" placeholder="Password" value={form.password} onChange={handleChange} required />
+          </div>
+          <button type="submit" className={styles['login-button']}>Sign In</button>
+        </form>
+        <div className={styles['login-footer']}>
+          <p>Don't have an account? <a href="/register">Create account</a></p>
+        </div>
+        {message && (message.toLowerCase().includes('error') || message.toLowerCase().includes('not found') || message.toLowerCase().includes('incorrect') ? (
+          <ErrorMessage message={message} />
+        ) : message.toLowerCase().includes('success') ? (
+          <SuccessMessage message={message} />
+        ) : (
+          <p>{message}</p>
+        ))}
+      </div>
     </div>
   );
 };
