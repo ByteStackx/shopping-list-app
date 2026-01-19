@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import styles from './Navbar.module.css';
+import LogoutButton from './LogoutButton.tsx';
 
 function Navbar() {
   return (
@@ -34,7 +35,9 @@ function Navbar() {
           Profile
         </NavLink>
       </div>
-      <div className={styles.spacer} aria-hidden="true" />
+      <div className={styles.actions}>
+        <LogoutButton />
+      </div>
     </nav>
   );
 }
