@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/ShoppingListPage.css';
+import styles from '../styles/ShoppingListPage.module.css';
 import { useSearchParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../store';
 import { fetchLists, addList, updateList, deleteList } from '../shoppingListSlice';
@@ -76,45 +76,70 @@ const ShoppingListPage: React.FC = () => {
     });
 
   return (
-  <div className="shopping-list-page">
-      <h2>Shopping Lists</h2>
-      {loading && <LoadingSpinner />}
-      {error && <ErrorMessage message={error} />}
-      <ShoppingListForm
-        form={form}
-        categories={categories}
-        isEditing={Boolean(form.id)}
-        onSubmit={form.id ? handleUpdate : handleAdd}
-        onChange={handleFormChange}
-      />
-      <div style={{ margin: '1em 0' }}>
-        <input type="text" placeholder="Search by name" value={search} onChange={e => setSearch(e.target.value)} />
-        <CategoryFilter
-          categories={categories}
-          value={categoryFilter}
-          onChange={setCategoryFilter}
-        />
-        <select
-          value={sort}
-          onChange={e => {
-            setSearchParams({ sort: e.target.value });
-          }}
-        >
-          <option value="name">Sort by Name</option>
-          <option value="category">Sort by Category</option>
-          <option value="date">Sort by Date Added</option>
-        </select>
-      </div>
-      <ul>
-        {filtered.map(item => (
-          <ShoppingListItem
-            key={item.id}
-            item={item}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
+    <div className={styles['shopping-list-page']}>
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <h1 className={styles.title}>Shopping Lists</h1>
+          <p className={styles.subtitle}>Organize and manage your shopping items</p>
+        </div>
+        
+        {loading && <LoadingSpinner />}
+        {error && <ErrorMessage message={error} />}
+        
+        <div className={styles['form-card']}>
+          <ShoppingListForm
+            form={form}
+            categories={categories}
+            isEditing={Boolean(form.id)}
+            onSubmit={form.id ? handleUpdate : handleAdd}
+            onChange={handleFormChange}
           />
-        ))}
-      </ul>
+        </div>
+        
+        <div className={styles.controls}>
+          <input 
+            type="text" 
+            placeholder="Search by name" 
+            value={search} 
+            onChange={e => setSearch(e.target.value)} 
+          />
+          <CategoryFilter
+            categories={categories}
+            value={categoryFilter}
+            onChange={setCategoryFilter}
+          />
+          <select
+            value={sort}
+            onChange={e => {
+              setSearchParams({ sort: e.target.value });
+            }}
+          >
+            <option value="name">Sort by Name</option>
+            <option value="category">Sort by Category</option>
+            <option value="date">Sort by Date Added</option>
+          </select>
+        </div>
+        
+        {filtered.length === 0 ? (
+          <div className={styles['empty-state']}>
+            <div className={styles['empty-state-icon']}>🛒</div>
+            <p className={styles['empty-state-text']}>
+              {search || categoryFilter !== 'All' ? 'No items match your search' : 'No items yet. Add your first shopping item!'}
+            </p>
+          </div>
+        ) : (
+          <ul className={styles['items-list']}>
+            {filtered.map(item => (
+              <ShoppingListItem
+                key={item.id}
+                item={item}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+              />
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 };

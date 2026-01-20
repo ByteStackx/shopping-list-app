@@ -1,6 +1,7 @@
 import React from 'react';
 import { ShoppingListItem } from '../types';
 import InputField from './InputField.tsx';
+import styles from './ShoppingListForm.module.css';
 
 interface ShoppingListFormProps {
   form: ShoppingListItem;
@@ -12,7 +13,7 @@ interface ShoppingListFormProps {
 
 function ShoppingListForm({ form, categories, isEditing, onSubmit, onChange }: ShoppingListFormProps) {
   return (
-    <form onSubmit={onSubmit} className="shopping-list-form">
+    <form onSubmit={onSubmit} className={styles['shopping-list-form']}>
       <InputField
         type="text"
         placeholder="Item Name"

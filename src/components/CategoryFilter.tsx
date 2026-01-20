@@ -1,3 +1,5 @@
+import styles from './CategoryFilter.module.css';
+
 interface CategoryFilterProps {
   categories: string[];
   value: string;
@@ -9,7 +11,7 @@ function CategoryFilter({ categories, value, onChange }: CategoryFilterProps) {
     <select
       value={value}
       onChange={e => onChange(e.target.value)}
-      className="category-filter"
+      className={styles['category-filter']}
     >
       <option value="All">All Categories</option>
       {categories.map(cat => (
